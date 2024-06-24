@@ -2,6 +2,10 @@ package librarySystem;
 
 import librarySystem.book.BookHandler;
 import librarySystem.book.bookGUI.*;
+import librarySystem.book.bookGUI.CloseLoanTab;
+import librarySystem.book.bookGUI.NewLoanTab;
+import librarySystem.book.bookGUI.SearchLoanTab;
+import librarySystem.loanSystem.LoanSystemFileHandler;
 import librarySystem.patron.PatronHandler;
 import librarySystem.patron.patronGUI.*;
 
@@ -17,6 +21,8 @@ public class LibrarySystemHandlerGUI {
     private final BookHandler bookManager;
     private final PatronHandler patronManager;
 
+    private final LoanSystemFileHandler loanManager;
+
     private final JTabbedPane tabbedPane;
     private final JFrame frame;
     
@@ -28,6 +34,7 @@ public class LibrarySystemHandlerGUI {
     public LibrarySystemHandlerGUI() {
         patronManager = new PatronHandler();
         bookManager = new BookHandler();
+        loanManager = new LoanSystemFileHandler();
         frame = new JFrame("Book Manager");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
@@ -74,6 +81,9 @@ public class LibrarySystemHandlerGUI {
         new UpdatePatronTab(frame,patronManager,tabbedPane);
         //Tab for viewing patron
         new VisualizePatronTab(frame,patronManager,tabbedPane);
+        new NewLoanTab(frame,loanManager,tabbedPane);
+        new CloseLoanTab(frame,loanManager,tabbedPane);
+        new SearchLoanTab(frame,loanManager,tabbedPane);
 
         frame.getContentPane().add(tabbedPane);
         frame.setVisible(true);

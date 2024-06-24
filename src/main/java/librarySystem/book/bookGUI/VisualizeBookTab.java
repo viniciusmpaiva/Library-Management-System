@@ -77,7 +77,7 @@ public class VisualizeBookTab implements TabModel {
      */
     public void actionPerformed(ActionEvent e) {
         try {
-            List<String> mangaTitles = handler.getAllMangaTitles();
+            List<String> mangaTitles = handler.getAllBookTItles();
             viewResultsArea.setText("");
             for (String title : mangaTitles) {
                 viewResultsArea.append(title + "\n");
