@@ -1,10 +1,9 @@
 package librarySystem.patron;
 
 /**
- * IndexEntry class
- * It represents an index entry object with its attributes
- * - cpf: International Standard Book Number
- * - filePointer: File pointer
+ * Class to represent an entry in the patron index
+ * It has a CPF and a file pointer
+ * The file pointer is the position of the patron in the patron file
  */
 public class PatronIndexEntry {
     private final  String cpf;

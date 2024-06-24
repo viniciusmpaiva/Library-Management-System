@@ -3,7 +3,6 @@ package librarySystem.patron.patronGUI;
 import librarySystem.TabModel;
 import librarySystem.patron.Patron;
 import librarySystem.patron.PatronHandler;
-import librarySystem.patron.PatronHandler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,8 +11,8 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Tab for searching manga
- * It has fields for the manga attributes and buttons to search the manga
+ * Tab for searching patron
+ * It has fields for the patron attributes and a button to search the patron
  * It implements the TabModel interface
  */
 public class SearchPatronTab implements TabModel {
@@ -33,11 +32,11 @@ public class SearchPatronTab implements TabModel {
     private JPanel searchButtonPanel;
 
     /**
-     * Constructor for the SearchMangaTab
+     * Constructor for the SearchPatronTab
      * It initializes the frame, handler and tabbedPane
      * It creates the tab
      * @param frame the JFrame
-     * @param handler the MangaHandler
+     * @param handler the PatronHandler
      * @param tabbedPane the JTabbedPane
      */
     public SearchPatronTab(JFrame frame, PatronHandler handler, JTabbedPane tabbedPane){
@@ -59,6 +58,7 @@ public class SearchPatronTab implements TabModel {
 
     /**
      * Method to initialize the components
+     * It initializes the panel, fields and button
      */
     public void initComponents() {
         searchPanel = new JPanel(new BorderLayout());
@@ -74,10 +74,7 @@ public class SearchPatronTab implements TabModel {
         searchInputPanel = new JPanel(new GridLayout(2, 2));
         searchButtonPanel = new JPanel(new GridLayout(1, 2));
     }
-
-    /**
-     * Method to add the components
-     */
+    
     public void addComponents() {
         searchInputPanel.add(new JLabel("Search by Last Name:"));
         searchInputPanel.add(searchLastNameField);

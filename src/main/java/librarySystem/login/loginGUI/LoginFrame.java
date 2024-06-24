@@ -5,12 +5,21 @@ import librarySystem.login.LoginHandler;
 import java.awt.*;
 import javax.swing.*; 
 
+/**
+ * Class to handle the GUI for the Login System
+ * It has a JFrame with a login form
+ * It has fields for username and password and a login button
+ * It implements the ActionListener interface
+ */
 public class LoginFrame {
     private final LoginHandler loginManager;
-
     private final JTabbedPane tabbedPane;
     private final JFrame frame;
 
+    /**
+     * Constructor for the LoginFrame
+     * It initializes the loginManager and creates the frame
+     */
     public LoginFrame(){
         loginManager = new LoginHandler();
         frame = new JFrame("Book Manager");

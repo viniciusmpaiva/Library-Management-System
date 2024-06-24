@@ -12,8 +12,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Tab for updating manga
- * It has fields for the manga attributes and a button to update the manga
+ * Tab for updating Book
+ * It has fields for the Book attributes and a button to update the Book
  * It implements the TabModel interface
  */
 
@@ -36,11 +36,11 @@ public class UpdateBookTab implements TabModel {
     private JTextField updateAcquiredVolumesField;
     private JButton updateByTitleButton;
     /**
-     * Constructor for the UpdateMangaTab
+     * Constructor for the UpdateBookTab
      * It initializes the frame, handler and tabbedPane
      * It creates the tab
      * @param frame the JFrame
-     * @param handler the MangaHandler
+     * @param handler the BookHandler
      * @param tabbedPane the JTabbedPane
      */
     public UpdateBookTab(JFrame frame, BookHandler handler, JTabbedPane tabbedPane){
@@ -118,9 +118,9 @@ public class UpdateBookTab implements TabModel {
     }
 
     /**
-     * Method to update the manga
-     * It gets the values from the fields and updates the manga
-     * It shows a message dialog if the manga is updated successfully or if there is an error
+     * Method to update the Book
+     * It gets the values from the fields and updates the Book
+     * It shows a message dialog if the Book is updated successfully or if there is an error
      * @param e the ActionEvent
      */
     public void actionPerformed(ActionEvent e) {

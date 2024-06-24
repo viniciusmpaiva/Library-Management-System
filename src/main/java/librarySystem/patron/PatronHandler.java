@@ -28,8 +28,8 @@ public class PatronHandler {
         private static final int NOT_FOUND = -1;
 
         /**
-         * Creates a new MangaHandler object.
-         * The constructor initializes the list of deleted records spaces by calling the loadDeletedRecordsSpaces method.
+         * Constructor for the PatronHandler class.
+         * It initializes the deletedRecordsSpaces list and loads the deleted records spaces from the data file.
          */
         public PatronHandler() {
             deletedRecordsSpaces = new ArrayList<>();
@@ -198,10 +198,10 @@ public class PatronHandler {
         }
 
         /**
-         * Searches for a patron by its CPF.
-         * The method retrieves the patron from the data file using the getManga method.
+         * Searches for patrons by CPF.
+         * The method retrieves the patron from the data file by its CPF.
          * @param cpf The CPF of the patron to search for.
-         * @return A list with the patron object with the specified CPF, or an empty list if not found.
+         * @return A list of patron objects with the specified CPF.
          * @throws IOException If an I/O error occurs.
          */
         public List<Patron> searchPatronByCpf(String cpf) throws IOException {
@@ -418,10 +418,9 @@ public class PatronHandler {
 
 
         /**
-         * Retrieves the CPFs of patrons with the specified lastName.
-         * The method reads the last name index file and uses binary search to find the last name index entries with the specified last name.
-         * @param lastName The title of the mangas to find.
-         * @return A list of CPFs of patrons with the specified last name.
+         * Retrieves all the last names of the patrons.
+         * The method reads the last name index file and retrieves all the last names.
+         * @return A list of all the lastNames of the patrons.
          * @throws IOException If an I/O error occurs.
          */
         public List<String> getCpfsByLastName(String lastName) throws IOException {
@@ -492,7 +491,7 @@ public class PatronHandler {
 
 
             try (RandomAccessFile lastNameIndexFile = new RandomAccessFile(TITLE_INDEX_FILE, "rw");
-                 RandomAccessFile tempLastNameIndexFile = new RandomAccessFile(tempFile, "rw")) {
+                RandomAccessFile tempLastNameIndexFile = new RandomAccessFile(tempFile, "rw")) {
                 while (lastNameIndexFile.getFilePointer() < lastNameIndexFile.length()) {
                     temp_currentLastName= lastNameIndexFile.readUTF();
                     temp_currentCpf = lastNameIndexFile.readUTF();

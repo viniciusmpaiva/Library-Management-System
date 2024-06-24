@@ -62,10 +62,10 @@ public class SecondayIndexManager {
     
 
         /**
-     * Retrieves the ISBNs of mangas with the specified title.
+     * Retrieves the ISBNs of books with the specified title.
      * The method reads the title index file and uses binary search to find the title index entries with the specified title.
-     * @param title The title of the mangas to find.
-     * @return A list of ISBNs of mangas with the specified title.
+     * @param title The title of the books to find.
+     * @return A list of ISBNs of books with the specified title.
      * @throws IOException If an I/O error occurs.
      */
     public List<String> getIsbnsByKey(String key) throws IOException {

@@ -7,12 +7,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
 /**
- * Tab for adding manga
- * It has fields for the manga attributes and a button to add the manga
+ * Tab for adding patron
+ * It has fields for the patron attributes and a button to add the patron
  * It implements the TabModel interface
  */
 public class AddPatronTab implements TabModel {
@@ -30,11 +28,11 @@ public class AddPatronTab implements TabModel {
     private JButton addButton;
 
     /**
-     * Constructor for the AddMangaTab
+     * Constructor for the AddPatronTab
      * It initializes the frame, handler and tabbedPane
      * It creates the tab
      * @param frame the JFrame
-     * @param handler the MangaHandler
+     * @param handler the PatronHandler
      * @param tabbedPane the JTabbedPane
      */
     public AddPatronTab(JFrame frame, PatronHandler handler, JTabbedPane tabbedPane){
@@ -56,7 +54,7 @@ public class AddPatronTab implements TabModel {
 
     /**
      * Method to initialize the components
-     * It creates the fields for the manga attributes and the button
+     * It initializes the panel, fields and button
      */
     public void initComponents(){
         addPanel = new JPanel(new GridLayout(13, 2));
@@ -71,8 +69,9 @@ public class AddPatronTab implements TabModel {
     }
 
     /**
-     * Method to add the components to the tab
-     * It adds the fields for the patron attributes and the button
+     * Method to add the components to the panel
+     * It adds labels and fields for the patron attributes
+     * It adds a button to add the patron
      */
     public void addComponents(){
         addPanel.add(new JLabel("CPF:"));
@@ -94,9 +93,9 @@ public class AddPatronTab implements TabModel {
     }
 
     /**
-     * Method to add a Patron
-     * It gets the values from the fields and creates a manga object
-     * It adds the manga to the handler
+     * Method to handle the add button click
+     * It gets the patron attributes from the fields
+     * It creates a patron object and adds it to the handler
      * It shows a message dialog with the result
      * @param e the ActionEvent
      */

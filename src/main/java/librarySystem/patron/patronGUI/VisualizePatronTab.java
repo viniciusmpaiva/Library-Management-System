@@ -9,9 +9,10 @@ import java.awt.event.*;
 import java.io.IOException;
 import java.util.List;
 
+
 /**
- * Tab for visualizing manga
- * It has a text area to display all the manga titles and a button to refresh the list
+ * Tab for visualizing patrons
+ * It has a button to refresh the list of patrons
  * It implements the TabModel interface
  */
 public class VisualizePatronTab implements TabModel {
@@ -25,11 +26,11 @@ public class VisualizePatronTab implements TabModel {
     JButton refreshButton;
 
     /**
-     * Constructor for the VisualizeMangaTab
+     * Constructor for the VisualizePatronTab
      * It initializes the frame, handler and tabbedPane
      * It creates the tab
      * @param frame the JFrame
-     * @param handler the MangaHandler
+     * @param handler the PatronHandler
      * @param tabbedPane the JTabbedPane
      */
     public VisualizePatronTab(JFrame frame, PatronHandler handler, JTabbedPane tabbedPane) {
@@ -51,6 +52,7 @@ public class VisualizePatronTab implements TabModel {
 
     /**
      * Method to initialize the components
+     * It initializes the panel, text area, scroll pane and button
      */
     public void initComponents() {
         viewPanel = new JPanel(new BorderLayout());
@@ -71,8 +73,8 @@ public class VisualizePatronTab implements TabModel {
     }
 
     /**
-     * Method to handle the action events
-     * It refreshes the list of manga titles
+     * Method to refresh the list of patrons
+     * It gets the list of patrons from the handler and displays it in the text area
      * @param e the ActionEvent
      */
     public void actionPerformed(ActionEvent e) {

@@ -1,7 +1,7 @@
 package librarySystem.patron;
 
 /**
- * Manga class
+ * Patron class
  * It represents a patron's object with its attributes
  * - name: Patron's first name
  * - lastName: Patron's last name

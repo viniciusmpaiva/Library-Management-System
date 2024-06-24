@@ -11,8 +11,8 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Tab for removing manga
- * It has fields for the manga attributes and buttons to remove the manga
+ * Tab for removing patron
+ * It has fields for the patron attributes and a button to remove the patron
  * It implements the TabModel interface
  */
 public class RemovePatronTab implements TabModel {
@@ -27,11 +27,11 @@ public class RemovePatronTab implements TabModel {
     JButton removeByLastNameButton;
 
     /**
-     * Constructor for the RemoveMangaTab
+     * Constructor for the RemovePatronTab
      * It initializes the frame, handler and tabbedPane
      * It creates the tab
      * @param frame the JFrame
-     * @param handler the MangaHandler
+     * @param handler the PatronHandler
      * @param tabbedPane the JTabbedPane
      */
     public RemovePatronTab(JFrame frame, PatronHandler handler, JTabbedPane tabbedPane){
@@ -53,6 +53,7 @@ public class RemovePatronTab implements TabModel {
 
     /**
      * Method to initialize the components
+     * It initializes the panel, fields and button
      */
     public void initComponents() {
         removePanel = new JPanel(new GridLayout(3, 2));
@@ -82,8 +83,8 @@ public class RemovePatronTab implements TabModel {
     }
 
     /**
-     * Method to handle the actions of the buttons
-     * It removes the patron from the list of patrons
+     * Method to handle the button click
+     * It removes the patron from the list
      * @param e the ActionEvent
      */
     public void actionPerformed(ActionEvent e) {

@@ -6,6 +6,9 @@ import java.awt.*;
 import librarySystem.book.bookGUI.BookFrame;
 import librarySystem.patron.patronGUI.PatronFrame;
 
+/**
+ * Frame for the admin to manage the library system
+ */
 public class LibraryFrame {
     private final JFrame frame;
     private JPanel panel;
@@ -14,6 +17,10 @@ public class LibraryFrame {
     private JButton bookButton;
     private JButton patronButton;
 
+    /**
+     * Constructor for the AdminFrame
+     * It initializes the frame and creates the components
+     */
     public LibraryFrame() {
         frame = new JFrame("Library System");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -37,6 +44,10 @@ public class LibraryFrame {
         frame.setVisible(true);
     }
 
+    /**
+     * Method to create the components
+     * It initializes the panel, titleLabel, bookButton, patronButton and loginButton
+     */
     private void createComponents(){
         panel = new JPanel(new GridLayout(3, 1));
         titleLabel = new JLabel("Choose one of the following options to manage:");
@@ -58,6 +69,9 @@ public class LibraryFrame {
 
     }
 
+    /**
+     * Method to add the components to the panel and the panel to the frame
+     */
     private void addComponents(){
         panel.add(titleLabel);
         panel.add(bookButton);

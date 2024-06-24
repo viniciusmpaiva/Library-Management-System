@@ -11,8 +11,8 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Tab for searching manga
- * It has fields for the manga attributes and buttons to search the manga
+ * Tab for searching book
+ * It has fields for the book attributes and buttons to search the book
  * It implements the TabModel interface
  */
 public class SearchBookTab implements TabModel {
@@ -39,11 +39,11 @@ public class SearchBookTab implements TabModel {
     private JPanel searchButtonPanel;
 
     /**
-     * Constructor for the SearchMangaTab
+     * Constructor for the SearchbookTab
      * It initializes the frame, handler and tabbedPane
      * It creates the tab
      * @param frame the JFrame
-     * @param handler the MangaHandler
+     * @param handler the bookHandler
      * @param tabbedPane the JTabbedPane
      */
     public SearchBookTab(JFrame frame, BookHandler handler, JTabbedPane tabbedPane){
@@ -118,19 +118,19 @@ public class SearchBookTab implements TabModel {
 
     /**
      * Method to handle the action events
-     * It searches the manga by title or isbn
+     * It searches the book by title or isbn
      * @param e the ActionEvent
      */
     public void actionPerformed(ActionEvent e) {
-        List<Book> mangases;
+        List<Book> books;
         if(e.getSource() == searchByTitleButton){
             try {
-                mangases = handler.searchBooksByTitle(searchTitleField.getText());
+                books = handler.searchBooksByTitle(searchTitleField.getText());
                 searchResultsArea.setText("");
-                for (Book book : mangases) {
+                for (Book book : books) {
                     searchResultsArea.append(book.toString() + "\n");
                 }
-                if (mangases.isEmpty()) {
+                if (books.isEmpty()) {
                     searchResultsArea.append("No books found.");
                 }
             } catch (IOException ex) {
@@ -139,12 +139,12 @@ public class SearchBookTab implements TabModel {
             }
         } else if(e.getSource() == searchByIsbnButton){
             try {
-                mangases = handler.searchBookByIsbn(searchIsbnField.getText());
+                books = handler.searchBookByIsbn(searchIsbnField.getText());
                 searchResultsArea.setText("");
-                for (Book book : mangases) {
+                for (Book book : books) {
                     searchResultsArea.append(book.toString() + "\n");
                 }
-                if (mangases.isEmpty()) {
+                if (books.isEmpty()) {
                     searchResultsArea.append("No books found.");
                 }
             } catch (IOException ex) {
@@ -153,12 +153,12 @@ public class SearchBookTab implements TabModel {
             }
         }else if(e.getSource() == searchByAuthorButton){
             try {
-                mangases = handler.searchBooksByAuthor(searchAuthorField.getText());
+                books = handler.searchBooksByAuthor(searchAuthorField.getText());
                 searchResultsArea.setText("");
-                for (Book book : mangases) {
+                for (Book book : books) {
                     searchResultsArea.append(book.toString() + "\n");
                 }
-                if (mangases.isEmpty()) {
+                if (books.isEmpty()) {
                     searchResultsArea.append("No books found.");
                 }
             } catch (IOException ex) {
@@ -167,12 +167,12 @@ public class SearchBookTab implements TabModel {
             }
         }else if(e.getSource() == searchByGenreButton){	
             try {
-                mangases = handler.searchBooksByGenre(searchGenreField.getText());
+                books = handler.searchBooksByGenre(searchGenreField.getText());
                 searchResultsArea.setText("");
-                for (Book book : mangases) {
+                for (Book book : books) {
                     searchResultsArea.append(book.toString() + "\n");
                 }
-                if (mangases.isEmpty()) {
+                if (books.isEmpty()) {
                     searchResultsArea.append("No books found.");
                 }
             } catch (IOException ex) {

@@ -5,14 +5,18 @@ import librarySystem.patron.PatronHandler;
 import java.awt.*;
 import javax.swing.*;
 
-
+/**
+ * GUI for the PatronHandler
+ * It creates a JFrame with a JTabbedPane
+ * The JTabbedPane has tabs for adding, updating, removing, searching and viewing book
+ */
 public class PatronFrame {
     private final PatronHandler patronManager;
     private final JTabbedPane tabbedPane;
     private final JFrame frame;
     
     /**
-     * Constructor for the MangaHandlerGUI
+     * Constructor for the PatronHandlerGUI
      * It creates a JFrame with a JTabbedPane
      * The JTabbedPane has tabs for adding, updating, removing, searching and viewing book
      */

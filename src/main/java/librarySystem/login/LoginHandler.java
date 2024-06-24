@@ -64,6 +64,11 @@ public class LoginHandler {
 
     }
 
+    /**
+     * Method to get a login
+     * @param username The username of the login
+     * @return The login if it exists, null otherwise
+     */
     private Login getLogin(String username){
         List<Login> logins = new ArrayList<>();
         String currentUsername;

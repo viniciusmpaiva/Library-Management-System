@@ -13,9 +13,9 @@ public class BookFrame {
     private final JFrame frame;
     
     /**
-     * Constructor for the MangaHandlerGUI
-     * It creates a JFrame with a JTabbedPane
-     * The JTabbedPane has tabs for adding, updating, removing, searching and viewing book
+     * Constructor for the BookFrame
+     * It initializes the bookManager, frame and tabbedPane
+     * It creates the tabs for adding, updating, removing, searching and viewing book
      */
     public BookFrame() {
         bookManager = new BookHandler();

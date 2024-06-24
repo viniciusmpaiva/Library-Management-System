@@ -28,7 +28,7 @@ public class BookHandler {
     private static final int NOT_FOUND = -1;
 
     /**
-     * Creates a new MangaHandler object.
+     * Creates a new BookHandler object.
      * The constructor initializes the list of deleted records spaces by calling the loadDeletedRecordsSpaces method.
      */
     public BookHandler() {
@@ -182,9 +182,9 @@ public class BookHandler {
 
 
     /**
-     * Searches for mangas by title.
+     * Searches for books by title.
      * The method searches the title index file for all titles that match the specified title.
-     * For each title found, the method retrieves the ISBNs from the title index file and retrieves the mangas from the data file.
+     * For each title found, the method retrieves the ISBNs from the title index file and retrieves the books from the data file.
      * @param title The title to search for.
      * @return A list of book objects with titles that match the specified title.
      * @throws IOException If an I/O error occurs.
@@ -205,9 +205,9 @@ public class BookHandler {
     }
 
     /**
-     * Searches for mangas by author.
+     * Searches for books by author.
      * The method searches the author index file for all authors that match the specified author.
-     * For each author found, the method retrieves the ISBNs from the author index file and retrieves the mangas from the data file.
+     * For each author found, the method retrieves the ISBNs from the author index file and retrieves the books from the data file.
      * @param author The author to search for.
      * @return A list of book objects with authors that match the specified author.
      * @throws IOException If an I/O error occurs.
@@ -228,9 +228,9 @@ public class BookHandler {
     }
 
     /**
-     * Searches for mangas by genre.
+     * Searches for books by genre.
      * The method searches the genre index file for all genres that match the specified genre.
-     * For each genre found, the method retrieves the ISBNs from the genre index file and retrieves the mangas from the data file.
+     * For each genre found, the method retrieves the ISBNs from the genre index file and retrieves the books from the data file.
      * @param genre The genre to search for.
      * @return A list of book objects with genres that match the specified genre.
      * @throws IOException If an I/O error occurs.
@@ -263,13 +263,13 @@ public class BookHandler {
      */
     public List<Book> searchBookByIsbn(String isbn) throws IOException {
 
-        List<Book> mangases = new ArrayList<>();
+        List<Book> books = new ArrayList<>();
         Book book = getBook(isbn);
 
         if (book != null) {
-            mangases.add(book);
+            books.add(book);
         }
-        return mangases;
+        return books;
     }
 
     /**
@@ -456,7 +456,7 @@ public class BookHandler {
         tempFile.renameTo(new File(INDEX_FILE));
     }
 
-    public List<String> getAllMangaTitles() throws IOException {
+    public List<String> getAllBooksTitles() throws IOException {
         List<String> titles = new ArrayList<>();
         String title;
 

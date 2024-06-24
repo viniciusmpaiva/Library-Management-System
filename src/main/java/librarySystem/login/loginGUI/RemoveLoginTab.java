@@ -9,6 +9,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
+/**
+ * Tab for removing login
+ * It has fields for the login attributes and a button to remove the login
+ * It implements the TabModel interface
+ */
 public class RemoveLoginTab implements TabModel {
     private final JFrame frame;
     private final LoginHandler loginHandler;
@@ -19,6 +24,14 @@ public class RemoveLoginTab implements TabModel {
     private JPasswordField passwordField;
     private JButton removeButton;
 
+    /**
+     * Constructor for the RemoveLoginTab
+     * It initializes the frame, handler and tabbedPane
+     * It creates the tab
+     * @param frame the JFrame
+     * @param loginHandler the LoginHandler
+     * @param tabbedPane the JTabbedPane
+     */
     public RemoveLoginTab(JFrame frame,LoginHandler loginHandler, JTabbedPane tabbedPane) {
         this.frame = frame;
         this.loginHandler = loginHandler;
@@ -26,13 +39,19 @@ public class RemoveLoginTab implements TabModel {
         createTab();
     }
 
-    @Override
+    /**
+     * Method to create the tab
+     * It initializes the components and adds the components
+     */
     public void createTab() {
         initComponents();
         addComponents();
     }
 
-    @Override
+    /**
+     * Method to initialize the components
+     * It initializes the panel, fields and button
+     */
     public void initComponents() {
         removePanel = new JPanel(new GridLayout(3, 2, 10, 10));
         usernameField = new JTextField();
@@ -41,7 +60,9 @@ public class RemoveLoginTab implements TabModel {
         removeButton.addActionListener(this);
     }
 
-    @Override
+    /**
+     * Method to add the components to the panel
+     */
     public void addComponents() {
         removePanel.add(new JLabel("Username:"));
         removePanel.add(usernameField);
@@ -52,7 +73,13 @@ public class RemoveLoginTab implements TabModel {
         tabbedPane.addTab("Remove Login", removePanel);
     }
 
-    @Override
+    /**
+     * Method to remove the login
+     * It gets the username and password from the fields
+     * It removes the login
+     * It shows a message dialog with the result
+     * @param e the ActionEvent
+     */
     public void actionPerformed(ActionEvent e) {
         String username = usernameField.getText();
         String password = new String(passwordField.getPassword());

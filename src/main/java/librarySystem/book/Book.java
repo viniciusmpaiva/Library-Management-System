@@ -3,16 +3,16 @@ package librarySystem.book;
 import java.util.List;
 
 /**
- * Manga class
- * It represents a manga object with its attributes
+ * book class
+ * It represents a book object with its attributes
  * - isbn: International Standard Book Number
- * - title: Title of the manga
+ * - title: Title of the book
  * - authors: List of authors
  * - startYear: Year of the first volume
  * - endYear: Year of the last volume
- * - publisher: Publisher of the manga
- * - genre: Genre of the manga
- * - magazine: Magazine where the manga was published
+ * - publisher: Publisher of the book
+ * - genre: Genre of the book
+ * - magazine: Magazine where the book was published
  * - editionYear: Year of the edition
  * - totalVolumes: Total number of volumes
  * - acquiredVolumesCounter: Number of volumes acquired
@@ -83,7 +83,7 @@ public class Book {
     // Getters
 
     /**
-     * Get the ISBN of the manga
+     * Get the ISBN of the book
      * @return ISBN
      */
     public String getIsbn() {
@@ -91,7 +91,7 @@ public class Book {
     }
 
     /**
-     * Get the title of the manga
+     * Get the title of the book
      * @return Title
      */
     public String getTitle() {
@@ -99,7 +99,7 @@ public class Book {
     }
 
     /**
-     * Get the authors of the manga
+     * Get the authors of the book
      * @return Authors
      */
     public String getAuthor() {
@@ -107,7 +107,7 @@ public class Book {
     }
 
     /**
-     * Get the start year of the manga
+     * Get the start year of the book
      * @return Start year
      */
     public int getStartYear() {
@@ -115,7 +115,7 @@ public class Book {
     }
 
     /**
-     * Get the end year of the manga
+     * Get the end year of the book
      * @return End year
      */
     public int getEndYear() {
@@ -123,7 +123,7 @@ public class Book {
     }
 
     /**
-     * Get the genre of the manga
+     * Get the genre of the book
      * @return Genre
      */
     public String getGenre() {
@@ -131,7 +131,7 @@ public class Book {
     }
 
     /**
-     * Get the magazine of the manga
+     * Get the magazine of the book
      * @return Magazine
      */
     public String getMagazine() {
@@ -139,7 +139,7 @@ public class Book {
     }
 
     /**
-     * Get the publisher of the manga
+     * Get the publisher of the book
      * @return Publisher
      */
     public String getPublisher() {
@@ -147,7 +147,7 @@ public class Book {
     }
 
     /**
-     * Get the edition year of the manga
+     * Get the edition year of the book
      * @return Edition year
      */
     public int getEditionYear() {
@@ -155,7 +155,7 @@ public class Book {
     }
 
     /**
-     * Get the total number of volumes of the manga
+     * Get the total number of volumes of the book
      * @return Total volumes
      */
     public int getTotalVolumes() {
@@ -163,7 +163,7 @@ public class Book {
     }
 
     /**
-     * Get the number of acquired volumes of the manga
+     * Get the number of acquired volumes of the book
      * @return Acquired volumes counter
      */
     public int getAcquiredVolumesCounter() {
@@ -171,7 +171,7 @@ public class Book {
     }
 
     /**
-     * Get the list of acquired volumes of the manga
+     * Get the list of acquired volumes of the book
      * @return Acquired volumes
      */
     public List<Integer> getAcquiredVolumes() {

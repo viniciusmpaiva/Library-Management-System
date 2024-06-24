@@ -9,9 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * GUI for the MangaHandler
- * It creates a JFrame with a JTabbedPane
- * The JTabbedPane has tabs for adding, updating, removing, searching and viewing book
+ * Class to handle the GUI for the Library System
+ * It has a JFrame with a login form
+ * It has fields for username and password and a login button
+ * It implements the ActionListener interface
  */
 public class LibrarySystemHandlerGUI implements ActionListener {
 
@@ -22,16 +23,20 @@ public class LibrarySystemHandlerGUI implements ActionListener {
     private LoginHandler loginHandler;
 
     /**
-     * Constructor for the MangaHandlerGUI
-     * It creates a JFrame with a JTabbedPane
-     * The JTabbedPane has tabs for adding, updating, removing, searching and viewing book
+     * Constructor for the LibrarySystemHandlerGUI
+     * It initializes the loginHandler and creates and adds components
      */
     public LibrarySystemHandlerGUI() {
         loginHandler = new LoginHandler();
-        initialize();
+        createAndAddComponents();
     }
 
-    private void initialize() {
+    /**
+     * Method to create and add components to the frame
+     * It initializes the frame and components
+     * It adds the components to the frame
+     */
+    private void createAndAddComponents() {
         frame = new JFrame("Login System");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(900, 300);
@@ -65,6 +70,14 @@ public class LibrarySystemHandlerGUI implements ActionListener {
         frame.setVisible(true);
     }
     
+    /**
+     * Method to handle the login button click
+     * It gets the username and password from the fields
+     * It creates a Login object and checks if the login is valid
+     * If the login is valid, it opens the LibraryFrame
+     * If the login is invalid, it shows an error message
+     * @param e the ActionEvent
+     */
     public void actionPerformed(ActionEvent e) {
         String username = usernameField.getText();
         String password = new String(passwordField.getPassword());

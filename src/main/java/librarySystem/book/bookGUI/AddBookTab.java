@@ -12,8 +12,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Tab for adding manga
- * It has fields for the manga attributes and a button to add the manga
+ * Tab for adding book
+ * It has fields for the book attributes and a button to add the book
  * It implements the TabModel interface
  */
 public class AddBookTab implements TabModel {
@@ -36,11 +36,11 @@ public class AddBookTab implements TabModel {
     private JButton addButton;
 
     /**
-     * Constructor for the AddMangaTab
+     * Constructor for the AddBookTab
      * It initializes the frame, handler and tabbedPane
      * It creates the tab
      * @param frame the JFrame
-     * @param handler the MangaHandler
+     * @param handler the BookHandler
      * @param tabbedPane the JTabbedPane
      */
     public AddBookTab(JFrame frame, BookHandler handler, JTabbedPane tabbedPane){
@@ -62,7 +62,7 @@ public class AddBookTab implements TabModel {
 
     /**
      * Method to initialize the components
-     * It creates the fields for the manga attributes and the button
+     * It initializes the panel, fields and button
      */
     public void initComponents(){
         addPanel = new JPanel(new GridLayout(13, 2));
@@ -82,8 +82,9 @@ public class AddBookTab implements TabModel {
     }
 
     /**
-     * Method to add the components to the tab
-     * It adds the fields for the manga attributes and the button
+     * Method to add the components to the panel
+     * It adds labels and fields for the book attributes
+     * It adds a button to add the book
      */
     public void addComponents(){
         addPanel.add(new JLabel("ISBN:"));
@@ -115,13 +116,7 @@ public class AddBookTab implements TabModel {
         tabbedPane.addTab("Add Book", addPanel);
     }
 
-    /**
-     * Method to add a manga
-     * It gets the values from the fields and creates a manga object
-     * It adds the manga to the handler
-     * It shows a message dialog with the result
-     * @param e the ActionEvent
-     */
+    
     public void actionPerformed(ActionEvent e) {
         try {
             

@@ -11,8 +11,8 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Tab for removing manga
- * It has fields for the manga attributes and buttons to remove the manga
+ * Tab for removing book
+ * It has fields for the book attributes and a button to remove the book
  * It implements the TabModel interface
  */
 public class RemoveBookTab implements TabModel {
@@ -27,11 +27,11 @@ public class RemoveBookTab implements TabModel {
     JButton removeByTitleButton;
 
     /**
-     * Constructor for the RemoveMangaTab
+     * Constructor for the RemoveBookTab
      * It initializes the frame, handler and tabbedPane
      * It creates the tab
      * @param frame the JFrame
-     * @param handler the MangaHandler
+     * @param handler the BookHandler
      * @param tabbedPane the JTabbedPane
      */
     public RemoveBookTab(JFrame frame, BookHandler handler, JTabbedPane tabbedPane){
@@ -82,8 +82,8 @@ public class RemoveBookTab implements TabModel {
     }
 
     /**
-     * Method to handle the actions of the buttons
-     * It removes the manga from the list of mangas
+     * Method to handle the action events
+     * It removes the book from the database
      * @param e the ActionEvent
      */
     public void actionPerformed(ActionEvent e) {
@@ -100,9 +100,9 @@ public class RemoveBookTab implements TabModel {
                 
             }else if (e.getSource() == removeByTitleButton) {
                 try {
-                    List<Book> mangases = handler.searchBooksByTitle(removeTitleField.getText());
-                    if (!mangases.isEmpty()) {
-                        handler.deleteBook(mangases.get(0).getIsbn());
+                    List<Book> books = handler.searchBooksByTitle(removeTitleField.getText());
+                    if (!books.isEmpty()) {
+                        handler.deleteBook(books.get(0).getIsbn());
                         JOptionPane.showMessageDialog(frame, "Book removed successfully!");
                     } else {
                         JOptionPane.showMessageDialog(frame, "Book not found.");

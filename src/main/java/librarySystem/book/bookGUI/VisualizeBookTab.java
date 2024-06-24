@@ -10,8 +10,8 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Tab for visualizing manga
- * It has a text area to display all the manga titles and a button to refresh the list
+ * Tab for visualizing Book
+ * It has a text area to display all the Book titles and a button to refresh the list
  * It implements the TabModel interface
  */
 public class VisualizeBookTab implements TabModel {
@@ -25,11 +25,11 @@ public class VisualizeBookTab implements TabModel {
     JButton refreshButton;
 
     /**
-     * Constructor for the VisualizeMangaTab
+     * Constructor for the VisualizeBookTab
      * It initializes the frame, handler and tabbedPane
      * It creates the tab
      * @param frame the JFrame
-     * @param handler the MangaHandler
+     * @param handler the BookHandler
      * @param tabbedPane the JTabbedPane
      */
     public VisualizeBookTab(JFrame frame, BookHandler handler, JTabbedPane tabbedPane) {
@@ -72,14 +72,14 @@ public class VisualizeBookTab implements TabModel {
 
     /**
      * Method to handle the action events
-     * It refreshes the list of manga titles
+     * It refreshes the list of Book titles
      * @param e the ActionEvent
      */
     public void actionPerformed(ActionEvent e) {
         try {
-            List<String> mangaTitles = handler.getAllMangaTitles();
+            List<String> bookTitles = handler.getAllBooksTitles();
             viewResultsArea.setText("");
-            for (String title : mangaTitles) {
+            for (String title : bookTitles) {
                 viewResultsArea.append(title + "\n");
             }
         } catch (IOException ex) {
