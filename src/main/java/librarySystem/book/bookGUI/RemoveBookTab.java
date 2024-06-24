@@ -55,7 +55,7 @@ public class RemoveBookTab implements TabModel {
      * Method to initialize the components
      */
     public void initComponents() {
-        removePanel = new JPanel(new GridLayout(3, 2));
+        removePanel = new JPanel(new GridLayout(2, 3));
         removePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         removeIsbnField = new JTextField();
@@ -69,15 +69,17 @@ public class RemoveBookTab implements TabModel {
      * Method to add the components
      */
     public void addComponents() {
-        removePanel.add(new JLabel("ISBN:"));
-        removePanel.add(removeIsbnField);
-        removePanel.add(new JLabel("Title:"));
-        removePanel.add(removeTitleField);
-
         removeByIsbnButton.addActionListener(this);
         removeByTitleButton.addActionListener(this);
+
+
+        removePanel.add(new JLabel("ISBN:"));
+        removePanel.add(removeIsbnField);
         removePanel.add(removeByIsbnButton);
+        removePanel.add(new JLabel("Title:"));
+        removePanel.add(removeTitleField);
         removePanel.add(removeByTitleButton);
+
         tabbedPane.addTab("Remove Book", removePanel);
     }
 

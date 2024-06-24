@@ -15,12 +15,16 @@ import java.util.List;
  * It has fields for the book attributes and buttons to search the book
  * It implements the TabModel interface
  */
-public class SearchBookTab implements TabModel {
+public class SearchBookTab implements TabModel{
     private final JFrame frame;
     private final BookHandler handler;
     private final JTabbedPane tabbedPane;
 
-    private JPanel searchPanel;
+    private JPanel mainPanel;
+    private JTabbedPane internalTabbedPane;
+
+    private JTextArea searchResultsArea;
+    private JScrollPane scrollPane;
 
     private JTextField searchTitleField;
     private JTextField searchIsbnField;
@@ -32,21 +36,15 @@ public class SearchBookTab implements TabModel {
     private JButton searchByAuthorButton;
     private JButton searchByGenreButton;
 
-    private JTextArea searchResultsArea;
-
-    private JScrollPane scrollPane;
-    private JPanel searchInputPanel;
-    private JPanel searchButtonPanel;
-
     /**
-     * Constructor for the SearchbookTab
+     * Constructor for the SearchBookTab
      * It initializes the frame, handler and tabbedPane
      * It creates the tab
      * @param frame the JFrame
      * @param handler the bookHandler
      * @param tabbedPane the JTabbedPane
      */
-    public SearchBookTab(JFrame frame, BookHandler handler, JTabbedPane tabbedPane){
+    public SearchBookTab(JFrame frame, BookHandler handler, JTabbedPane tabbedPane) {
         this.frame = frame;
         this.handler = handler;
         this.tabbedPane = tabbedPane;
@@ -67,8 +65,15 @@ public class SearchBookTab implements TabModel {
      * Method to initialize the components
      */
     public void initComponents() {
-        searchPanel = new JPanel(new BorderLayout());
-        searchPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        internalTabbedPane = new JTabbedPane();
+
+        searchResultsArea = new JTextArea();
+        searchResultsArea.setEditable(false);
+        scrollPane = new JScrollPane(searchResultsArea);
+        scrollPane.setPreferredSize(new Dimension(600, 400));
 
         searchTitleField = new JTextField();
         searchIsbnField = new JTextField();
@@ -79,105 +84,104 @@ public class SearchBookTab implements TabModel {
         searchByIsbnButton = new JButton("Search by ISBN");
         searchByAuthorButton = new JButton("Search by Author");
         searchByGenreButton = new JButton("Search by Genre");
+
+        Dimension buttonSize = new Dimension(150, 30);
+        searchByTitleButton.setPreferredSize(buttonSize);
+        searchByIsbnButton.setPreferredSize(buttonSize);
+        searchByAuthorButton.setPreferredSize(buttonSize);
+        searchByGenreButton.setPreferredSize(buttonSize);
         
-        searchResultsArea = new JTextArea();
-        searchResultsArea.setEditable(false);
-        scrollPane = new JScrollPane(searchResultsArea);
-        searchInputPanel = new JPanel(new GridLayout(2, 2));
-        searchButtonPanel = new JPanel(new GridLayout(1, 2));
+        searchByTitleButton.addActionListener(this);
+        searchByIsbnButton.addActionListener(this);
+        searchByAuthorButton.addActionListener(this);
+        searchByGenreButton.addActionListener(this);
     }
 
     /**
      * Method to add the components
      */
     public void addComponents() {
-        searchInputPanel.add(new JLabel("Search by Title:"));
-        searchInputPanel.add(searchTitleField);
-        searchInputPanel.add(new JLabel("Search by ISBN:"));
-        searchInputPanel.add(searchIsbnField);
-        searchInputPanel.add(new JLabel("Search by Author:"));
-        searchInputPanel.add(searchAuthorField);
-        searchInputPanel.add(new JLabel("Search by Genre:"));
-        searchInputPanel.add(searchGenreField);
+        mainPanel.add(internalTabbedPane, BorderLayout.CENTER);
+        mainPanel.add(scrollPane, BorderLayout.SOUTH);
 
-        searchPanel.add(searchInputPanel, BorderLayout.NORTH);
-        searchPanel.add(scrollPane, BorderLayout.CENTER);
+        internalTabbedPane.addTab("Search by Title", createSearchPanel("Title", searchTitleField, searchByTitleButton));
+        internalTabbedPane.addTab("Search by ISBN", createSearchPanel("ISBN", searchIsbnField, searchByIsbnButton));
+        internalTabbedPane.addTab("Search by Author", createSearchPanel("Author", searchAuthorField, searchByAuthorButton));
+        internalTabbedPane.addTab("Search by Genre", createSearchPanel("Genre", searchGenreField, searchByGenreButton));
 
-        searchButtonPanel.add(searchByTitleButton);
-        searchButtonPanel.add(searchByIsbnButton);
-        searchButtonPanel.add(searchByAuthorButton);
-        searchButtonPanel.add(searchByGenreButton);
-        searchPanel.add(searchButtonPanel, BorderLayout.SOUTH);
+        tabbedPane.addTab("Search Book", mainPanel);
+    }
 
-        searchByTitleButton.addActionListener(this);
-        searchByIsbnButton.addActionListener(this);
-        searchByAuthorButton.addActionListener(this);
-        searchByGenreButton.addActionListener(this);
-        tabbedPane.addTab("Search Book", searchPanel);
+    /**
+     * Method to create individual search panels
+     * @param type the type of search
+     * @param textField the JTextField for the search input
+     * @param button the JButton for the search action
+     * @return the JPanel for the search type
+     */
+    private JPanel createSearchPanel(String type, JTextField textField, JButton button) {
+        JPanel panel = new JPanel(new BorderLayout());
+
+        JPanel inputPanel = new JPanel(new GridLayout(1, 2));
+        inputPanel.add(new JLabel("Search by " + type + ":"));
+        inputPanel.add(textField);
+
+        panel.add(inputPanel, BorderLayout.NORTH);
+        panel.add(button, BorderLayout.SOUTH);
+
+        return panel;
     }
 
     /**
      * Method to handle the action events
-     * It searches the book by title or isbn
+     * It searches the book by title, ISBN, author, or genre
      * @param e the ActionEvent
      */
     public void actionPerformed(ActionEvent e) {
-        List<Book> books;
-        if(e.getSource() == searchByTitleButton){
+        List<Book> books = null;
+        String query = null;
+
+        if (e.getSource() == searchByTitleButton) {
+            query = searchTitleField.getText();
             try {
-                books = handler.searchBooksByTitle(searchTitleField.getText());
-                searchResultsArea.setText("");
-                for (Book book : books) {
-                    searchResultsArea.append(book.toString() + "\n");
-                }
-                if (books.isEmpty()) {
-                    searchResultsArea.append("No books found.");
-                }
+                books = handler.searchBooksByTitle(query);
             } catch (IOException ex) {
                 ex.printStackTrace();
-                JOptionPane.showMessageDialog(frame, "Error searching book.");
+                JOptionPane.showMessageDialog(frame, "Error searching book by title.");
             }
-        } else if(e.getSource() == searchByIsbnButton){
+        } else if (e.getSource() == searchByIsbnButton) {
+            query = searchIsbnField.getText();
             try {
-                books = handler.searchBookByIsbn(searchIsbnField.getText());
-                searchResultsArea.setText("");
-                for (Book book : books) {
-                    searchResultsArea.append(book.toString() + "\n");
-                }
-                if (books.isEmpty()) {
-                    searchResultsArea.append("No books found.");
-                }
+                books = handler.searchBookByIsbn(query);
             } catch (IOException ex) {
                 ex.printStackTrace();
-                JOptionPane.showMessageDialog(frame, "Error searching book.");
+                JOptionPane.showMessageDialog(frame, "Error searching book by ISBN.");
             }
-        }else if(e.getSource() == searchByAuthorButton){
+        } else if (e.getSource() == searchByAuthorButton) {
+            query = searchAuthorField.getText();
             try {
-                books = handler.searchBooksByAuthor(searchAuthorField.getText());
-                searchResultsArea.setText("");
-                for (Book book : books) {
-                    searchResultsArea.append(book.toString() + "\n");
-                }
-                if (books.isEmpty()) {
-                    searchResultsArea.append("No books found.");
-                }
+                books = handler.searchBooksByAuthor(query);
             } catch (IOException ex) {
                 ex.printStackTrace();
-                JOptionPane.showMessageDialog(frame, "Error searching book.");
+                JOptionPane.showMessageDialog(frame, "Error searching book by author.");
             }
-        }else if(e.getSource() == searchByGenreButton){	
+        } else if (e.getSource() == searchByGenreButton) {
+            query = searchGenreField.getText();
             try {
-                books = handler.searchBooksByGenre(searchGenreField.getText());
-                searchResultsArea.setText("");
-                for (Book book : books) {
-                    searchResultsArea.append(book.toString() + "\n");
-                }
-                if (books.isEmpty()) {
-                    searchResultsArea.append("No books found.");
-                }
+                books = handler.searchBooksByGenre(query);
             } catch (IOException ex) {
                 ex.printStackTrace();
-                JOptionPane.showMessageDialog(frame, "Error searching book.");
+                JOptionPane.showMessageDialog(frame, "Error searching book by genre.");
+            }
+        }
+
+        if (books != null) {
+            searchResultsArea.setText("");
+            for (Book book : books) {
+                searchResultsArea.append(book.toString() + "\n");
+            }
+            if (books.isEmpty()) {
+                searchResultsArea.append("No books found.");
             }
         }
     }

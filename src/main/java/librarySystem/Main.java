@@ -12,7 +12,6 @@ public class Main {
      * @param args Arguments
      */
     public static void main(String[] args) {
-
         SwingUtilities.invokeLater(LibrarySystemHandlerGUI::new);
     }
 }

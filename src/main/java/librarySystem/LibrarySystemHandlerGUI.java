@@ -39,7 +39,7 @@ public class LibrarySystemHandlerGUI implements ActionListener {
     private void createAndAddComponents() {
         frame = new JFrame("Login System");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(900, 300);
+        frame.setSize(1200, 300);
 
         // Define a GridLayout with 3 rows and 2 columns
         frame.setLayout(new GridLayout(4, 2, 10, 10));
