@@ -272,13 +272,13 @@ public class BookHandler {
      */
     public List<Book> searchBookByIsbn(String isbn) throws IOException {
 
-        List<Book> mangases = new ArrayList<>();
+        List<Book> books = new ArrayList<>();
         Book book = getBook(isbn);
 
         if (book != null) {
-            mangases.add(book);
+            books.add(book);
         }
-        return mangases;
+        return books;
     }
 
     /**

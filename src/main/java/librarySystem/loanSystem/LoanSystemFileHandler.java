@@ -1,8 +1,11 @@
 package librarySystem.loanSystem;
 
 import librarySystem.book.Book;
+import librarySystem.book.BookHandler;
 import librarySystem.patron.Patron;
+import librarySystem.patron.PatronHandler;
 
+import java.io.EOFException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -18,15 +21,21 @@ import java.time.LocalDate;
 public class LoanSystemFileHandler {
     private String DATA_LOAN_FILE = "data_loan.dat";
     private String INDEX_LOAN_FILE = "index_loan.dat";
+    private BookHandler bookHandler = new BookHandler();
+    private PatronHandler patronHandler = new PatronHandler();
 
 
-    public boolean isBookAvailable(Book book) throws IOException {
+    public boolean isBookAvailable(String isbn) throws IOException {
+        if(bookHandler.getBook(isbn) == null){
+            throw new IOException("Book not found");
+        }
+
         try (RandomAccessFile index_file = new RandomAccessFile(INDEX_LOAN_FILE, "rw")) {
             while (index_file.getFilePointer() < index_file.length()) {
                 String tempIsbn = index_file.readUTF();
                 String status = index_file.readUTF();
                 index_file.readLong();
-                if (tempIsbn.equals(book.getIsbn()) && status.equals("OPEN")){
+                if (tempIsbn.equals(isbn) && status.equals("OPEN  ")){
                     return false;
                 }
             }
@@ -35,6 +44,13 @@ public class LoanSystemFileHandler {
             System.out.println("File not found, creating file...");
             return true;
         }
+    }
+
+    public boolean isCpfRegistered(String cpf) throws IOException{
+        if(patronHandler.searchPatronByCpf(cpf) == null){
+            throw new IOException("Patron not found");
+        }
+        return true;
     }
 
     public void newLoan(LoanSystem loan) throws IOException {
@@ -55,7 +71,7 @@ public class LoanSystemFileHandler {
         try(RandomAccessFile file = new RandomAccessFile(INDEX_LOAN_FILE, "rw")) {
             file.seek(file.length());
             file.writeUTF(isbn);
-            file.writeUTF("OPEN");
+            file.writeUTF("OPEN  ");
             file.writeLong(offset);
         } catch (FileNotFoundException e) {
             System.out.println("File not found, creating file...");
@@ -68,10 +84,8 @@ public class LoanSystemFileHandler {
                 String tempIsbn = indexFile.readUTF();
                 String status = indexFile.readUTF();
                 long offset = indexFile.readLong();
-                if(status.equals("CLOSED") && tempIsbn.equals(isbn)){
-                    throw new IOException("Loan already closed");
-                }
-                if(tempIsbn.equals(isbn) && status.equals("OPEN")){
+                System.out.println("ISBN: " + tempIsbn + "\nStatus: " + status + "\nOffset: " + offset);
+                if(tempIsbn.equals(isbn) && !status.equals("CLOSED")){
                     try(RandomAccessFile dataFile = new RandomAccessFile(DATA_LOAN_FILE, "rw")) {
                         dataFile.seek(offset);
                         dataFile.readUTF();
@@ -79,14 +93,13 @@ public class LoanSystemFileHandler {
                         dataFile.readUTF();
                         dataFile.readUTF();
                         dataFile.writeUTF("CLOSED");
-                        changeStatusIndexFile(isbn);
+                        changeStatusIndexFile(isbn,"CLOSED");
                         return;
                     }
                 }
             }
-            throw new IOException("Loan not found");
-        }catch (Exception e) {
-            System.out.println(e.toString());
+        }catch (EOFException eofException) {
+            System.out.println("Loan not found");
         }
     }
 
@@ -96,20 +109,21 @@ public class LoanSystemFileHandler {
                 String tempisbn = indexFile.readUTF();
                 String status = indexFile.readUTF();
                 long offset = indexFile.readLong();
-                System.out.println("ISBN: " + tempisbn + "\nStatus: " + status + "\nOffset: " + offset);
-                if(status.equals("OPEN") && tempisbn.equals(isbn)){
+                if(!status.equals("CLOSED") && tempisbn.equals(isbn)){
                     try(RandomAccessFile dataFile = new RandomAccessFile(DATA_LOAN_FILE,"rw")){
                         dataFile.seek(offset);
                         String loanedIsbn = dataFile.readUTF();
                         String cpf = dataFile.readUTF();
                         LocalDate startDate = LocalDate.parse(dataFile.readUTF());
                         LocalDate dueDate = LocalDate.parse(dataFile.readUTF());
-                        String statusLoan = dataFile.readUTF();
-                        System.out.println("ISBN: " + loanedIsbn +
-                                "\nCPF: " + cpf+
-                                "\nStart Date: " + startDate+
-                                "\nDue Date: " + dueDate +
-                                "\nStatus: " + statusLoan);
+                        String statusLoan;
+                        if (dueDate.isBefore(LocalDate.now())) {
+                            statusLoan = "LATE  ";
+                            dataFile.writeUTF(statusLoan);
+                            changeStatusIndexFile(isbn,statusLoan);
+                        }else{
+                            statusLoan = dataFile.readUTF();
+                        }
                         return "ISBN: " + loanedIsbn +
                                 "\nCPF: " + cpf+
                                 "\nStart Date: " + startDate+
@@ -123,12 +137,12 @@ public class LoanSystemFileHandler {
     }
 
 
-    public void changeStatusIndexFile(String isbn) throws IOException   {
+    public void changeStatusIndexFile(String isbn,String status) throws IOException   {
         try(RandomAccessFile indexFIle = new RandomAccessFile(INDEX_LOAN_FILE,"rw")){
             while(indexFIle.getFilePointer() < indexFIle.length()){
                 String tempIsbn = indexFIle.readUTF();
                 if(tempIsbn.equals(isbn)){
-                    indexFIle.writeUTF("CLOSED");
+                    indexFIle.writeUTF(status);
                     return;
                 }
                 indexFIle.readUTF();

@@ -4,8 +4,8 @@ import librarySystem.book.BookHandler;
 import librarySystem.book.bookGUI.*;
 import librarySystem.book.bookGUI.CloseLoanTab;
 import librarySystem.book.bookGUI.NewLoanTab;
-import librarySystem.book.bookGUI.SearchLoanTab;
 import librarySystem.loanSystem.LoanSystemFileHandler;
+import librarySystem.loanSystem.loanGUI.SearchLoanTab;
 import librarySystem.patron.PatronHandler;
 import librarySystem.patron.patronGUI.*;
 
