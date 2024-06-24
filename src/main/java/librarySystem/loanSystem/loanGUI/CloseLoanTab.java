@@ -88,7 +88,7 @@ public class CloseLoanTab implements TabModel {
     public void actionPerformed(ActionEvent e) {
         try {
             handler.closeLoan(getIsbnField.getText());
-            JOptionPane.showMessageDialog(frame, "Book added successfully!");
+            JOptionPane.showMessageDialog(frame, "Loan closed successfully!");
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(frame, "Error adding book." + "\n" + ex.getMessage());
         } catch(Exception ex){

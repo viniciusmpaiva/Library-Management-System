@@ -22,14 +22,11 @@ public class SearchLoanTab implements TabModel {
     private JTextField getIsbnField;
     private JButton addButton;
 
-    /**
-     * Constructor for the AddMangaTab
-     * It initializes the frame, handler and tabbedPane
-     * It creates the tab
-     * @param frame the JFrame
-     * @param handler the MangaHandler
-     * @param tabbedPane the JTabbedPane
-     */
+    private JTextArea searchResultsArea;
+
+
+
+
     public SearchLoanTab(JFrame frame, LoanSystemFileHandler handler, JTabbedPane tabbedPane){
         this.frame = frame;
         this.handler = handler;
@@ -56,6 +53,9 @@ public class SearchLoanTab implements TabModel {
         addPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         getIsbnField = new JTextField();
         addButton = new JButton("Search Loan");
+        searchResultsArea = new JTextArea();
+        searchResultsArea.setEditable(false);
+
     }
 
     /**
@@ -82,6 +82,7 @@ public class SearchLoanTab implements TabModel {
     public void actionPerformed(ActionEvent e) {
         try {
             System.out.println(handler.checkLoan(getIsbnField.getText()));
+            searchResultsArea.setText(handler.checkLoan(getIsbnField.getText()));
             JOptionPane.showMessageDialog(frame, "Loan Found successfully!");
 
         } catch (IOException ex) {

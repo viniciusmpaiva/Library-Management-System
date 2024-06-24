@@ -65,11 +65,13 @@ public class LoanSystemFileHandler {
     public void closeLoan(String isbn) throws IOException {
         try(RandomAccessFile indexFile = new RandomAccessFile(INDEX_LOAN_FILE, "rw")) {
             while(indexFile.getFilePointer() < indexFile.length()){
-                long filePosition = indexFile.getFilePointer();
                 String tempIsbn = indexFile.readUTF();
                 String status = indexFile.readUTF();
+                long offset = indexFile.readLong();
+                if(status.equals("CLOSED") && tempIsbn.equals(isbn)){
+                    throw new IOException("Loan already closed");
+                }
                 if(tempIsbn.equals(isbn) && status.equals("OPEN")){
-                    long offset = indexFile.readLong();
                     try(RandomAccessFile dataFile = new RandomAccessFile(DATA_LOAN_FILE, "rw")) {
                         dataFile.seek(offset);
                         dataFile.readUTF();
@@ -77,12 +79,14 @@ public class LoanSystemFileHandler {
                         dataFile.readUTF();
                         dataFile.readUTF();
                         dataFile.writeUTF("CLOSED");
+                        changeStatusIndexFile(isbn);
                         return;
                     }
                 }
-                indexFile.readLong();
             }
             throw new IOException("Loan not found");
+        }catch (Exception e) {
+            System.out.println(e.toString());
         }
     }
 
@@ -92,6 +96,7 @@ public class LoanSystemFileHandler {
                 String tempisbn = indexFile.readUTF();
                 String status = indexFile.readUTF();
                 long offset = indexFile.readLong();
+                System.out.println("ISBN: " + tempisbn + "\nStatus: " + status + "\nOffset: " + offset);
                 if(status.equals("OPEN") && tempisbn.equals(isbn)){
                     try(RandomAccessFile dataFile = new RandomAccessFile(DATA_LOAN_FILE,"rw")){
                         dataFile.seek(offset);
@@ -100,6 +105,11 @@ public class LoanSystemFileHandler {
                         LocalDate startDate = LocalDate.parse(dataFile.readUTF());
                         LocalDate dueDate = LocalDate.parse(dataFile.readUTF());
                         String statusLoan = dataFile.readUTF();
+                        System.out.println("ISBN: " + loanedIsbn +
+                                "\nCPF: " + cpf+
+                                "\nStart Date: " + startDate+
+                                "\nDue Date: " + dueDate +
+                                "\nStatus: " + statusLoan);
                         return "ISBN: " + loanedIsbn +
                                 "\nCPF: " + cpf+
                                 "\nStart Date: " + startDate+
@@ -113,6 +123,21 @@ public class LoanSystemFileHandler {
     }
 
 
+    public void changeStatusIndexFile(String isbn) throws IOException   {
+        try(RandomAccessFile indexFIle = new RandomAccessFile(INDEX_LOAN_FILE,"rw")){
+            while(indexFIle.getFilePointer() < indexFIle.length()){
+                String tempIsbn = indexFIle.readUTF();
+                if(tempIsbn.equals(isbn)){
+                    indexFIle.writeUTF("CLOSED");
+                    return;
+                }
+                indexFIle.readUTF();
+                indexFIle.readLong();
+            }
+        }catch (Exception e){
+            System.out.println("Error changing status of loan");
+        }
+    }
 }
 
 
