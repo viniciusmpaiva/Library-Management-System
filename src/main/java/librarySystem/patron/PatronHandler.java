@@ -386,7 +386,7 @@ public class PatronHandler {
         long filePointer;
 
         try (RandomAccessFile patronIndexFile = new RandomAccessFile(INDEX_FILE, "rw");
-             RandomAccessFile tempIndexFile = new RandomAccessFile(tempFile, "rw")) {
+            RandomAccessFile tempIndexFile = new RandomAccessFile(tempFile, "rw")) {
             // Besides storing the PatronIndexEntry in a list, we write it to a temporary file to avoid reading the whole index file again
             while (patronIndexFile.getFilePointer() < patronIndexFile.length()) {
                 currentCpf = patronIndexFile.readUTF();

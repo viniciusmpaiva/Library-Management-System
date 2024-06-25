@@ -1,9 +1,7 @@
 package librarySystem.loanSystem.loanGUI;
 
-import librarySystem.book.bookGUI.CloseLoanTab;
-import librarySystem.book.bookGUI.NewLoanTab;
+
 import librarySystem.loanSystem.LoanSystemFileHandler;
-import librarySystem.patron.PatronHandler;
 
 import javax.swing.*;
 import java.awt.*;

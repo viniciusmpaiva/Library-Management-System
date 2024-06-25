@@ -1,11 +1,10 @@
 package librarySystem.loanSystem;
 
-import librarySystem.book.Book;
 import librarySystem.book.BookHandler;
-import librarySystem.patron.Patron;
 import librarySystem.patron.PatronHandler;
 
 import java.io.EOFException;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -19,8 +18,9 @@ import java.time.LocalDate;
  * - writeNewLoan: Method to write a new loan
  */
 public class LoanSystemFileHandler {
-    private String DATA_LOAN_FILE = "data_loan.dat";
-    private String INDEX_LOAN_FILE = "index_loan.dat";
+    private static final String DATA_LOAN_FILE = "data_loan.dat";
+    private static final String INDEX_LOAN_FILE = "index_loan.dat";
+    private static final String TEMP_FILE = "temp.dat";
     private BookHandler bookHandler = new BookHandler();
     private PatronHandler patronHandler = new PatronHandler();
 
@@ -54,9 +54,26 @@ public class LoanSystemFileHandler {
     }
 
     public void newLoan(LoanSystem loan) throws IOException {
+        Boolean writtenIndex = false;
+
         try(RandomAccessFile file = new RandomAccessFile(DATA_LOAN_FILE, "rw")) {
             file.seek(file.length());
-            writeIndex(loan.getLoanedIsbn(), file.getFilePointer());
+            try(RandomAccessFile indexFile = new RandomAccessFile(INDEX_LOAN_FILE, "rw")) {
+                while(indexFile.getFilePointer() < indexFile.length()){
+                    String tempIsbn = indexFile.readUTF();
+                    if(tempIsbn.equals(loan.getLoanedIsbn())){
+                        removeIndex(tempIsbn);
+                        writeIndex(tempIsbn, file.getFilePointer());
+                        writtenIndex = true;
+                        break;
+                    }
+                    indexFile.readUTF();
+                    indexFile.readLong();
+                }
+            }
+            if(!writtenIndex){
+                writeIndex(loan.getLoanedIsbn(), file.getFilePointer());
+            }
             file.writeUTF(loan.getLoanedIsbn());
             file.writeUTF(loan.getcpf());
             file.writeUTF(loan.getStartDate().toString());
@@ -158,7 +175,7 @@ public class LoanSystemFileHandler {
             while(indexFile.getFilePointer() < indexFile.length()){
                 String tempisbn = indexFile.readUTF();
                 String status = indexFile.readUTF();
-                long offset = indexFile.readLong();
+                indexFile.readLong();
                 if(!status.equals("LATE  ") && tempisbn.equals(isbn)){
                     return true;
                 }
@@ -167,6 +184,29 @@ public class LoanSystemFileHandler {
         }catch (EOFException e){
             return false;
         }
+    }
+
+    public void removeIndex(String isbn_rem) throws IOException {
+
+        File tempFile = new File(TEMP_FILE);   
+        String temp_currentIsbn;
+        String temp_currentFlag;
+        long temp_currentOffset;
+
+        try (RandomAccessFile secondaryIndexFile = new RandomAccessFile(INDEX_LOAN_FILE, "rw");
+            RandomAccessFile tempsecondaryIndexFile = new RandomAccessFile(tempFile, "rw")) {
+            while (secondaryIndexFile.getFilePointer() < secondaryIndexFile.length()) {
+                temp_currentIsbn = secondaryIndexFile.readUTF();
+                temp_currentFlag = secondaryIndexFile.readUTF();
+                temp_currentOffset = secondaryIndexFile.readLong();
+                if (!temp_currentIsbn.equals(isbn_rem)) {
+                    tempsecondaryIndexFile.writeUTF(temp_currentIsbn);
+                    tempsecondaryIndexFile.writeUTF(temp_currentFlag);
+                    tempsecondaryIndexFile.writeLong(temp_currentOffset);
+                }
+            }
+        }
+        tempFile.renameTo(new File(INDEX_LOAN_FILE));
     }
 }
 

@@ -1,6 +1,5 @@
 package librarySystem.loanSystem;
 
-import librarySystem.book.Book;
 
 import java.time.LocalDate;
 

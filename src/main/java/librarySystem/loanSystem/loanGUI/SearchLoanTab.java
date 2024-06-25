@@ -1,14 +1,12 @@
 package librarySystem.loanSystem.loanGUI;
 import librarySystem.TabModel;
-import librarySystem.book.Book;
-import librarySystem.book.BookHandler;
+
 import librarySystem.loanSystem.LoanSystemFileHandler;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Tab for searching manga

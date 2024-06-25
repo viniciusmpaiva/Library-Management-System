@@ -1,8 +1,6 @@
-package librarySystem.book.bookGUI;
+package librarySystem.loanSystem.loanGUI;
 
 import librarySystem.TabModel;
-import librarySystem.book.Book;
-import librarySystem.book.BookHandler;
 import librarySystem.loanSystem.LoanSystem;
 import librarySystem.loanSystem.LoanSystemFileHandler;
 
@@ -11,8 +9,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
+
 
 /**
  * Tab for adding manga
