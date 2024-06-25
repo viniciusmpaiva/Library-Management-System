@@ -1,20 +1,12 @@
-# Manga Handler
+# Library Management System
 
-Manga Handler é uma aplicação Java para gerenciar coleções de mangás. Este projeto utiliza Maven para gerenciar dependências e facilitar o processo de build.
-
-## Vídeo de Explicação
-
-Confira este vídeo no YouTube para uma explicação detalhada do código e de como utilizar o Manga Handler:
-
-[![Assista no YouTube](https://img.youtube.com/vi/VdrfkYiryJ8/maxresdefault.jpg)](https://www.youtube.com/watch?v=VdrfkYiryJ8)
+LMS é uma aplicação Java para gerenciar uma biblioteca. Este projeto utiliza Maven para gerenciar dependências e facilitar o processo de build.
 
 ## Funcionalidades
 
-- Adicionar novos mangás à coleção
-- Listar todos os mangás na coleção
-- Buscar mangás por título ou autor
-- Atualizar mangás por titulo
-- Remover mangás da coleção
+- CRUD para o gerenciamento de livros
+- CURUD para o gerenciamento de patronos
+- CRUD para o gerenciamento de emprestimos
 
 ## Pré-requisitos
 
@@ -46,35 +38,3 @@ Confira este vídeo no YouTube para uma explicação detalhada do código e de c
     cd mangahandler/target 
     ```
 
-## Estrutura do Projeto
-
-```plaintext
-book-handler
-├── src
-│   ├── main
-│   │   ├── java
-│   │   │   └── book
-│   │   │       └── seuprojeto
-│   │   │           ├── AddMangaTab.java
-│   │   │           ├── IndexEntry.java
-│   │   │           ├── Main.java
-│   │   │           ├── Manga.java
-│   │   │           ├── MangaHandler.java
-│   │   │           ├── MangaHandlerGUI.java
-│   │   │           ├── RemoveMangaTab.java
-│   │   │           ├── SearchMangaTab.java
-│   │   │           ├── TabModel.java
-│   │   │           ├── TitleIndexEntry.java
-│   │   │           ├── UpdateMangaTab.java
-│   │   │           └── VisualizeMangaTab.java
-│   ├── resources
-│   ├── test
-│   └── target
-│       ├── classes
-│       ├── generated-sources
-│       ├── generated-test-sources
-│       ├── maven-archiver
-│       ├── maven-status
-│       ├── test-classes
-│       └── mangahandler-1.0-SNAPSHOT.jar
-└── pom.xml
