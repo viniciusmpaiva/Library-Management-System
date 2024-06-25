@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 import librarySystem.book.bookGUI.BookFrame;
+import librarySystem.loanSystem.loanGUI.LoanFrame;
 import librarySystem.login.loginGUI.LoginFrame;
 import librarySystem.patron.patronGUI.PatronFrame;
 
@@ -16,6 +17,7 @@ public class AdminFrame {
     private JButton bookButton;
     private JButton patronButton;
     private JButton loginButton;
+    private JButton loanButton;
 
     public AdminFrame() {
         frame = new JFrame("Administer Library System");
@@ -65,6 +67,13 @@ public class AdminFrame {
             new LoginFrame();
             frame.dispose();
         });
+
+        loanButton = new JButton("Manage Loans");
+        loanButton.setBounds(300, 500, 200, 50);
+        loanButton.addActionListener(e -> {
+            new LoanFrame();
+            frame.dispose();
+        });
     }
 
     private void addComponents(){
@@ -72,6 +81,7 @@ public class AdminFrame {
         panel.add(bookButton);
         panel.add(patronButton);
         panel.add(loginButton);
+        panel.add(loanButton);
         frame.add(panel);
     }
 }
