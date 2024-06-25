@@ -20,7 +20,7 @@ Os requisitos são fornecidos na atribuição, mas incluímos novos requisitos c
 3. **Gerenciamento de Empréstimos:** Registrar empréstimos de livros para usuários, registrar devoluções de livros e gerenciar multas por atrasos.
 4. **Design da Interface Gráfica (GUI):** Design de uma interface gráfica usando Swing que permita aos bibliotecários interagir com o sistema e realizar as tarefas necessárias. A GUI deve ser intuitiva, fácil de navegar e visualmente atraente.
 5. **Design Orientado a Objetos:** Implementação do sistema utilizando princípios de programação orientada a objetos. Criação de classes para livros, usuários, empréstimos e outras entidades relevantes. Utilização de herança e polimorfismo para criar um design de sistema flexível e extensível.
-6. **Entrada/Saída de Dados:** Implementação de E/S de arquivos para salvar e carregar dados de livros, usuários e empréstimos a partir de um banco de dados local ou arquivo. Garantir a integridade e consistência dos dados durante as operações de leitura/escrita.
+6. **Entrada/Saída de Dados:** Implementação de E/S de arquivos para salvar e carregar dados de livros, usuários e empréstimos a partir de arquivos. Garantir a integridade e consistência dos dados durante as operações de leitura/escrita.
 7. **Estruturas de Controle e Estruturas de Dados:** Implementação da lógica do sistema usando estruturas de controle (loops, condicionais) e estruturas de dados apropriadas (arrays, listas, mapas) para gerenciar o inventário de livros, registros de usuários e transações de empréstimos.
 8. **Tratamento de Exceções:** Implementação de tratamento de exceções para capturar e lidar com possíveis erros ou entradas inválidas dos usuários durante a operação do sistema.
 9. **Autenticação de Usuários:** Implementação de um sistema de autenticação simples para restringir o acesso às funcionalidades do sistema com base em funções de usuário (bibliotecário, administrador).
@@ -58,11 +58,9 @@ Nosso projeto implementa as funcionalidades descritas nos requisitos de forma in
 ### Entrada/Saída de Dados
 
 - Implementamos E/S de arquivos para salvar e carregar dados.
-- Garantimos a integridade dos dados utilizando técnicas de sincronização durante as operações de leitura/escrita.
 
 ### Estruturas de Controle e Estruturas de Dados
 
-- Utilizamos listas e mapas para gerenciar o inventário de livros e registros de usuários.
 - Implementamos loops e condicionais para a lógica do sistema.
 
 ### Tratamento de Exceções
@@ -96,7 +94,6 @@ Nosso projeto implementa as funcionalidades descritas nos requisitos de forma in
 ### Resultados dos Testes
 
 - Todos os testes unitários passaram sem erros.
-- A integração das funcionalidades foi testada manualmente e automatizada, resultando em um sistema funcional sem bugs conhecidos.
 
 ## Procedimentos de Construção
 
