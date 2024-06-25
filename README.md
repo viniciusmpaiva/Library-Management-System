@@ -2,12 +2,12 @@
 
 ## Identificação do Grupo
 
-- **Nome do Aluno 1:** [Nome]
-- **Número USP do Aluno 1:** [Número USP]
-- **Nome do Aluno 2:** [Nome]
-- **Número USP do Aluno 2:** [Número USP]
-- **Nome do Aluno 3:** [Nome]
-- **Número USP do Aluno 3:** [Número USP]
+- **Nome do Aluno 1:** Vinicius Paiva
+- **Número USP do Aluno 1:** 13783530
+- **Nome do Aluno 2:** Vitor Zago 
+- **Número USP do Aluno 2:** 14783595
+- **Nome do Aluno 3:** Arthur Moreira Correa
+- **Número USP do Aluno 3:** 13749952
 
 ## Requisitos
 
@@ -16,7 +16,7 @@ Os requisitos são fornecidos na atribuição, mas incluímos novos requisitos c
 ### Funcionalidades do Sistema:
 
 1. **Gerenciamento de Livros:** Adicionar, editar, excluir e buscar livros por título, autor, ISBN ou categoria.
-2. **Gerenciamento de Usuários:** Adicionar, editar, excluir e buscar usuários por nome ou informação de contato.
+2. **Gerenciamento de Usuários:** Adicionar, editar, excluir e buscar usuários por nome, sobrenome ou cpf.
 3. **Gerenciamento de Empréstimos:** Registrar empréstimos de livros para usuários, registrar devoluções de livros e gerenciar multas por atrasos.
 4. **Design da Interface Gráfica (GUI):** Design de uma interface gráfica usando Swing que permita aos bibliotecários interagir com o sistema e realizar as tarefas necessárias. A GUI deve ser intuitiva, fácil de navegar e visualmente atraente.
 5. **Design Orientado a Objetos:** Implementação do sistema utilizando princípios de programação orientada a objetos. Criação de classes para livros, usuários, empréstimos e outras entidades relevantes. Utilização de herança e polimorfismo para criar um design de sistema flexível e extensível.
