@@ -94,6 +94,9 @@ public class SearchLoanTab implements TabModel {
                 String loan = handler.checkLoan(searchIsbnField.getText());
                 searchResultsArea.setText("");
                 searchResultsArea.append(loan);
+                if(handler.isLate(searchIsbnField.getText())){
+                    JOptionPane.showMessageDialog(frame, "This loan is late. You need to pay a 20$ worth fine");
+                }
             } catch (IOException ex) {
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(frame, "Error searching book.");

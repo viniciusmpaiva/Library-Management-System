@@ -94,23 +94,12 @@ public class NewLoanTab implements TabModel {
             if(getIsbnField.getText().isEmpty() || getCpfField.getText().isEmpty()) {
                 throw new Exception("Empty fields");
             }
-            try {
-                if(!handler.isBookAvailable(getIsbnField.getText())){
-                    throw new IOException("Book not available.");
-                }
-            }catch (IOException ex){
-                JOptionPane.showMessageDialog(frame, "Book not available." + "\n" + ex.getMessage());
-                return;
+            if(!handler.isBookAvailable(getIsbnField.getText())){
+                throw new IOException("Book not available.");
             }
-            try{
-                if(!handler.isCpfRegistered(getCpfField.getText())){
-                    throw new IOException("Patron not found.");
-                }
-            }catch (IOException ex){
-                JOptionPane.showMessageDialog(frame, "Patron not found." + "\n" + ex.getMessage());
-                return;
+            if(!handler.isCpfRegistered(getCpfField.getText())){
+                throw new IOException("Patron not found.");
             }
-
             LoanSystem loanSystem = new LoanSystem(
                     getIsbnField.getText(),
                     getCpfField.getText(),

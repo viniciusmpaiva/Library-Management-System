@@ -152,6 +152,22 @@ public class LoanSystemFileHandler {
             System.out.println("Error changing status of loan");
         }
     }
+
+    public boolean isLate(String isbn) throws IOException{
+        try(RandomAccessFile indexFile = new RandomAccessFile(INDEX_LOAN_FILE,"rw")){
+            while(indexFile.getFilePointer() < indexFile.length()){
+                String tempisbn = indexFile.readUTF();
+                String status = indexFile.readUTF();
+                long offset = indexFile.readLong();
+                if(!status.equals("LATE  ") && tempisbn.equals(isbn)){
+                    return true;
+                }
+            }
+            return false;
+        }catch (EOFException e){
+            return false;
+        }
+    }
 }
 
 

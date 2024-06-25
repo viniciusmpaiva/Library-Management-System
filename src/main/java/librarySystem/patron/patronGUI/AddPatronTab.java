@@ -1,14 +1,13 @@
 package librarySystem.patron.patronGUI;
 
 import librarySystem.TabModel;
-import librarySystem.patron.*;
+import librarySystem.patron.Patron;
+import librarySystem.patron.PatronHandler;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Tab for adding manga

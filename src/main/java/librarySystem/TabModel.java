@@ -1,6 +1,7 @@
 package librarySystem;
 
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Interface for the tab models
